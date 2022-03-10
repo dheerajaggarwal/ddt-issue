@@ -1,0 +1,47 @@
+{
+  "details": {
+    "summary": "Check DDT issue",
+    "loopSource": "{{data}}"
+  },
+  "validation": {
+    "assertions": [
+      {
+        "source": "statusCode",
+        "property": null,
+        "operator": "equalToNumber",
+        "expectedValue": "200"
+      },
+      {
+        "source": "jsonBody",
+        "property": "0.id",
+        "operator": "equals",
+        "expectedValue": "{{data.$.key1}}"
+      },
+      {
+        "source": "textBody",
+        "property": null,
+        "operator": "Default Validator",
+        "expectedValue": ""
+      }
+    ],
+    "expectedBody": {
+      "content": "{{data.$.expectedBody}}",
+      "type": "json"
+    }
+  },
+  "request": {
+    "url": "https://cloud.vrest.io/i/optimizory/m/TP3/manasa",
+    "method": "GET",
+    "queryParams": [
+      {
+        "name": "id",
+        "value": "{{returnQuery()}}"
+      }
+    ]
+  },
+  "extensions": {
+    "vrest-excel-plugin": {
+      "testDataFilePath": "{{$projectDir}}/data/sample.csv"
+    }
+  }
+}
